@@ -88,6 +88,7 @@ pub fn logs() {
 ///
 pub fn start_server() {
     let mut paths = vec![
+        String::from("/home/alesame/Dev/livecode/2023/viu/app/Contents/Resources/app/server/ruby/bin/sonic-pi-server.rb"),
         String::from("/Applications/Sonic Pi.app/Contents/Resources/app/server/ruby/bin/sonic-pi-server.rb"),
         String::from("/Applications/Sonic Pi.app/server/bin/sonic-pi-server.rb"),
         String::from("/Applications/Sonic Pi.app/server/ruby/bin/sonic-pi-server.rb"),
