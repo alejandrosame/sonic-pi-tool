@@ -106,7 +106,7 @@ pub fn start_server() {
         paths.insert(0, home);
     };
 
-    match paths.iter().find(|p| Path::new(&p).canonicalize().exists()) {
+    match paths.iter().find(|p| Path::new(&p).canonicalize().unwrap().exists()) {
         Some(p) => {
             let cmd = &CString::new(p.clone()).unwrap();
             execv::<CString>(cmd, &[]).unwrap_or_else(|_| panic!("Unable to start {}", *p))
