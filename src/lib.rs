@@ -88,7 +88,7 @@ pub fn logs() {
 ///
 pub fn start_server() {
     let mut paths = vec![
-        String::from("/home/alesame/Dev/livecode/2023/viu/app/Contents/Resources/app/server/ruby/bin/sonic-pi-server.rb"),
+        String::from("/nix/store/0kw6l0dma3dvg748rrmgh5vhcy7jyvj8-sonic-pi-3.3.1/app/server/ruby/bin/sonic-pi-server.rb"),
         String::from("/Applications/Sonic Pi.app/Contents/Resources/app/server/ruby/bin/sonic-pi-server.rb"),
         String::from("/Applications/Sonic Pi.app/server/bin/sonic-pi-server.rb"),
         String::from("/Applications/Sonic Pi.app/server/ruby/bin/sonic-pi-server.rb"),
@@ -106,7 +106,7 @@ pub fn start_server() {
         paths.insert(0, home);
     };
 
-    match paths.iter().find(|p| Path::new(&p).canonicalize().unwrap().exists()) {
+    match paths.iter().find(|p| Path::new(&p).exists()) {
         Some(p) => {
             let cmd = &CString::new(p.clone()).unwrap();
             execv::<CString>(cmd, &[]).unwrap_or_else(|_| panic!("Unable to start {}", *p))
