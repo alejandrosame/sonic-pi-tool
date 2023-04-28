@@ -8,6 +8,7 @@ use std::ffi::CString;
 use std::io::{self, Read};
 use std::path::Path;
 use std::{process};
+use std::fs;
 
 mod file;
 mod log_packet;
@@ -88,15 +89,15 @@ pub fn logs() {
 ///
 pub fn start_server() {
     let mut paths = vec![
-        String::from("/home/alesame/Dev/livecode/2023/viu/app/Contents/Resources/app/server/ruby/bin/sonic-pi-server.rb"),
-        String::from("/Applications/Sonic Pi.app/Contents/Resources/app/server/ruby/bin/sonic-pi-server.rb"),
-        String::from("/Applications/Sonic Pi.app/server/bin/sonic-pi-server.rb"),
-        String::from("/Applications/Sonic Pi.app/server/ruby/bin/sonic-pi-server.rb"),
-        String::from("./app/server/bin/sonic-pi-server.rb"),
-        String::from("/opt/sonic-pi/app/server/bin/sonic-pi-server.rb"),
-        String::from("/usr/lib/sonic-pi/server/bin/sonic-pi-server.rb"),
-        String::from("/opt/sonic-pi/app/server/ruby/bin/sonic-pi-server.rb"),
-        String::from("/usr/lib/sonic-pi/server/ruby/bin/sonic-pi-server.rb"),
+        fs::canonicalize(String::from("/home/alesame/Dev/livecode/2023/viu/app/Contents/Resources/app/server/ruby/bin/sonic-pi-server.rb")),
+        fs::canonicalize(String::from("/Applications/Sonic Pi.app/Contents/Resources/app/server/ruby/bin/sonic-pi-server.rb")),
+        fs::canonicalize(String::from("/Applications/Sonic Pi.app/server/bin/sonic-pi-server.rb")),
+        fs::canonicalize(String::from("/Applications/Sonic Pi.app/server/ruby/bin/sonic-pi-server.rb")),
+        fs::canonicalize(String::from("./app/server/bin/sonic-pi-server.rb")),
+        fs::canonicalize(String::from("/opt/sonic-pi/app/server/bin/sonic-pi-server.rb")),
+        fs::canonicalize(String::from("/usr/lib/sonic-pi/server/bin/sonic-pi-server.rb")),
+        fs::canonicalize(String::from("/opt/sonic-pi/app/server/ruby/bin/sonic-pi-server.rb")),
+        fs::canonicalize(String::from("/usr/lib/sonic-pi/server/ruby/bin/sonic-pi-server.rb")),
     ];
 
     if let Some(home_directory) = dirs::home_dir() {
